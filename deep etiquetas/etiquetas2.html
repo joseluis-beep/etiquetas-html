@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>DevMastery Ultra · 42 Etiquetas + 32 Proyectos Interactivos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --fondo-principal: #0a0a0a;
+            --fondo-tarjeta: #111111;
+            --texto-principal: #f1f5f9;
+            --texto-suave: #cbd5e1;
+            --acento: #3b82f6;
+            --acento-hover: #60a5fa;
+            --borde: #2d2d2d;
+            --sombra: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+            --codigo-fondo: #1e1e2e;
+            --exito: #10b981;
+            --warning: #f59e0b;
+            --rosa: #ec4899;
+            --morado: #a855f7;
+            --cyan: #06b6d4;
+        }
+
+        body {
+            font-family: system-ui, 'Segoe UI', 'Inter', sans-serif;
+            background: var(--fondo-principal);
+            color: var(--texto-principal);
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 2px solid var(--borde);
+            padding-bottom: 1.5rem;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, #60a5fa, #a855f7, #ec4899, #06b6d4);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: var(--texto-suave);
+            margin-top: 0.5rem;
+        }
+
+        .badge-count {
+            display: inline-block;
+            background: var(--acento);
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            background: var(--fondo-tarjeta);
+            padding: 1rem 1.5rem;
+            border-radius: 60px;
+            border: 1px solid var(--borde);
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 600;
+            color: var(--texto-suave);
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            transition: all 0.2s;
+        }
+
+        .nav-links a:hover {
+            background: var(--acento);
+            color: white;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin: 2rem 0 1.5rem 0;
+            border-left: 6px solid var(--acento);
+            padding-left: 1rem;
+        }
+
+        /* Grid de tarjetas */
+        .etiquetas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Tarjeta con animación de salto al hover */
+        .card {
+            background: var(--fondo-tarjeta);
+            border-radius: 1.5rem;
+            border: 1px solid var(--borde);
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            cursor: pointer;
+            box-shadow: var(--sombra);
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.7);
+            border-color: var(--acento);
+        }
+
+        .card-header {
+            background: #1a1a2e;
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid var(--borde);
+            font-family: monospace;
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .card-header code {
+            background: var(--codigo-fondo);
+            color: #facc15;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .card-body {
+            padding: 1.2rem;
+        }
+
+        .card-body p {
+            color: var(--texto-suave);
+            margin-bottom: 0.8rem;
+        }
+
+        .demo-mini {
+            background: #1e1e2e;
+            padding: 0.8rem;
+            border-radius: 1rem;
+            margin: 0.8rem 0;
+            border-left: 3px solid var(--acento);
+            font-size: 0.9rem;
+        }
+
+        /* Panel de explicación que aparece al hacer clic */
+        .explicacion-panel {
+            margin-top: 1rem;
+            background: #0f0f1a;
+            border-radius: 1rem;
+            padding: 1rem;
+            display: none;
+            border-top: 2px solid var(--acento);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .explicacion-panel.show {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .explicacion-panel pre {
+            background: var(--codigo-fondo);
+            padding: 0.8rem;
+            border-radius: 0.8rem;
+            overflow-x: auto;
+            font-size: 0.75rem;
+            margin: 0.5rem 0;
+        }
+
+        .explicacion-texto {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Proyectos - 32 proyectos únicos */
+        .proyectos-header {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--borde);
+            max-height: 220px;
+            overflow-y: auto;
+        }
+
+        .btn-proyecto {
+            background: #1e1e2e;
+            border: 1px solid var(--borde);
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.8rem;
+            color: var(--texto-suave);
+        }
+
+        .btn-proyecto.active {
+            background: var(--acento);
+            color: white;
+            border-color: var(--acento);
+        }
+
+        .btn-proyecto:hover {
+            background: #2d2d3a;
+            transform: translateY(-2px);
+        }
+
+        .proyecto-preview {
+            background: var(--fondo-tarjeta);
+            border-radius: 1.5rem;
+            border: 1px solid var(--borde);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .preview-header {
+            background: #1a1a2e;
+            padding: 0.8rem 1.5rem;
+            font-weight: 600;
+            border-bottom: 1px solid var(--borde);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .vista-previa {
+            padding: 2rem;
+            background: #0f0f0f;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .codigo-proyecto {
+            padding: 1.5rem;
+            background: #0a0a0f;
+        }
+
+        .codigo-proyecto pre {
+            background: var(--codigo-fondo);
+            padding: 1rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            font-size: 0.8rem;
+        }
+
+        footer {
+            margin-top: 4rem;
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--borde);
+            color: var(--texto-suave);
+        }
+
+        @media (max-width: 700px) {
+            .container { padding: 1rem; }
+            .etiquetas-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>📚 HTML & CSS · Academia Master</h1>
+        <p>▸ <strong>42 etiquetas</strong> con animación al hover | Click → código + teoría | <strong>32 mini proyectos</strong> completos ▸</p>
+    </div>
+    <div class="nav-links">
+        <a href="#etiquetas">🏷️ Etiquetas HTML (42)</a>
+        <a href="#proyectos">🧩 32 Proyectos Interactivos</a>
+    </div>
+
+    <!-- SECCIÓN ETIQUETAS (42+) -->
+    <h2 class="section-title" id="etiquetas">📄 42 Etiquetas HTML · Click para ver código y explicación</h2>
+    <div class="etiquetas-grid" id="etiquetas-grid"></div>
+
+    <!-- SECCIÓN 32 PROYECTOS ÚNICOS -->
+    <h2 class="section-title" id="proyectos">🎯 32 Mini Proyectos · Código + Vista Previa</h2>
+    <div class="proyectos-header" id="proyectos-lista"></div>
+    <div id="proyecto-contenedor" class="proyecto-preview"></div>
+
+    <footer>
+        ⚡ 42 etiquetas con animación de salto | Click en cualquier tarjeta para ver su código y teoría | 32 proyectos originales con código completo
+    </footer>
+</div>
+
+<script>
+    // ==================== 42 ETIQUETAS CON EXPLICACIÓN COMPLETA ====================
+    const etiquetas = [
+        { nombre: "&lt;div&gt;", tipo: "Bloque", desc: "Contenedor genérico para agrupar elementos.", demo: "<div style='background:#2d2d3a; padding:8px; border-radius:8px;'>📦 Div ejemplo</div>", codigo: "<div class='contenedor'>Contenido</div>", teoria: "Elemento en bloque sin significado semántico. Es la base para layouts con CSS." },
+        { nombre: "&lt;span&gt;", tipo: "Inline", desc: "Contenedor en línea para estilos específicos.", demo: "Texto con <span style='color:#facc15;'>span dorado</span>", codigo: "<span style='color:red'>texto</span>", teoria: "Útil para aplicar CSS a fragmentos sin romper el flujo del texto." },
+        { nombre: "&lt;h1&gt; - &lt;h6&gt;", tipo: "Encabezados", desc: "Jerarquía de títulos del más importante al menos.", demo: "<h1 style='font-size:1.2rem;'>Título H1</h1><h6 style='font-size:0.7rem;'>H6 pequeño</h6>", codigo: "<h1>Título principal</h1>", teoria: "Mejoran SEO y estructura documental. Solo un H1 por página." },
+        { nombre: "&lt;p&gt;", tipo: "Párrafo", desc: "Bloque de texto con márgenes automáticos.", demo: "<p>Este es un párrafo de ejemplo con texto.</p>", codigo: "<p>Texto del párrafo aquí</p>", teoria: "Representa un párrafo. Los navegadores añaden espacio superior e inferior." },
+        { nombre: "&lt;a&gt;", tipo: "Enlace", desc: "Hipervínculos para navegación.", demo: "<a href='#' style='color:#60a5fa;'>🔗 Enlace de ejemplo</a>", codigo: "<a href='https://google.com'>Ir a Google</a>", teoria: "Atributo href es obligatorio. target='_blank' abre nueva pestaña." },
+        { nombre: "&lt;img&gt;", tipo: "Imagen", desc: "Inserta imágenes con src y alt.", demo: "<img src='https://picsum.photos/id/20/80/60' style='border-radius:12px;'>", codigo: "<img src='imagen.jpg' alt='descripción'>", teoria: "Etiqueta autocontenida. El atributo alt es crucial para accesibilidad." },
+        { nombre: "&lt;ul&gt; / &lt;li&gt;", tipo: "Lista", desc: "Listas desordenadas con viñetas.", demo: "<ul style='margin-left:1rem;'><li>HTML</li><li>CSS</li><li>JS</li></ul>", codigo: "<ul><li>Elemento 1</li><li>Elemento 2</li></ul>", teoria: "UL = unordered list. Para listas ordenadas se usa &lt;ol&gt;." },
+        { nombre: "&lt;ol&gt; / &lt;li&gt;", tipo: "Lista ordenada", desc: "Listas numeradas.", demo: "<ol style='margin-left:1rem;'><li>Primero</li><li>Segundo</li></ol>", codigo: "<ol><li>Paso 1</li><li>Paso 2</li></ol>", teoria: "OL genera números automáticos. Se puede estilizar con CSS." },
+        { nombre: "&lt;button&gt;", tipo: "Botón", desc: "Elemento interactivo para acciones.", demo: "<button style='background:#3b82f6; border:none; padding:6px 20px; border-radius:30px; cursor:pointer;'>Click</button>", codigo: "<button type='button'>Enviar</button>", teoria: "Puede contener texto, iconos o HTML. Se estiliza completamente con CSS." },
+        { nombre: "&lt;input&gt;", tipo: "Formulario", desc: "Campo de entrada de datos.", demo: "<input type='text' placeholder='Escribe...' style='background:#1e1e2e; border:1px solid #3b82f6; padding:6px; border-radius:8px;'>", codigo: "<input type='text' name='nombre'>", teoria: "Múltiples tipos: text, email, password, number, checkbox, radio." },
+        { nombre: "&lt;label&gt;", tipo: "Etiqueta", desc: "Asocia texto a un campo de formulario.", demo: "<label><input type='checkbox'> Acepto términos</label>", codigo: "<label for='campo'>Nombre:</label>", teoria: "Mejora accesibilidad: al hacer clic en el label se enfoca el input." },
+        { nombre: "&lt;table&gt;", tipo: "Tabla", desc: "Muestra datos en filas y columnas.", demo: "<table style='width:100%; border-collapse:collapse;'><tr><td style='border:1px solid gray;padding:4px;'>Celda 1</td><td style='border:1px solid gray;padding:4px;'>Celda 2</td></tr></table>", codigo: "<table><tr><td>Dato</td></tr></table>", teoria: "Se combina con &lt;tr&gt; (fila), &lt;td&gt; (celda), &lt;th&gt; (cabecera)." },
+        { nombre: "&lt;form&gt;", tipo: "Formulario", desc: "Agrupa campos para enviar datos al servidor.", demo: "<form style='padding:6px; background:#1a1a2e; border-radius:12px;'>📝 Formulario demo</form>", codigo: "<form action='/enviar' method='post'>...</form>", teoria: "Define un área para recoger información del usuario." },
+        { nombre: "&lt;header&gt;", tipo: "Semántico", desc: "Cabecera de una sección o página.", demo: "<header style='background:#1e1e2e;padding:6px;border-radius:8px;'>🏠 Logo + Navegación</header>", codigo: "<header>Contenido introductorio</header>", teoria: "Mejora semántica y SEO. Puede contener títulos, logos, nav." },
+        { nombre: "&lt;footer&gt;", tipo: "Semántico", desc: "Pie de página.", demo: "<footer style='font-size:0.7rem;'>© 2025 Mi Sitio Web</footer>", codigo: "<footer>Derechos reservados</footer>", teoria: "Suele contener información de contacto, copyright, enlaces." },
+        { nombre: "&lt;section&gt;", tipo: "Semántico", desc: "Define una sección temática de contenido.", demo: "<section style='border-left:2px solid #3b82f6; padding-left:8px;'>📌 Sección de noticias</section>", codigo: "<section><h2>Título</h2><p>Contenido</p></section>", teoria: "Agrupa contenido relacionado temáticamente." },
+        { nombre: "&lt;nav&gt;", tipo: "Navegación", desc: "Menú con enlaces de navegación principal.", demo: "<nav><a href='#'>Inicio</a> | <a href='#'>Blog</a> | <a href='#'>Contacto</a></nav>", codigo: "<nav><a href='...'>Link</a></nav>", teoria: "Indica al navegador que contiene la navegación principal." },
+        { nombre: "&lt;article&gt;", tipo: "Semántico", desc: "Contenido independiente y reutilizable.", demo: "<article><strong>📰 Artículo destacado</strong><p>Contenido independiente</p></article>", codigo: "<article>...</article>", teoria: "Ideal para posts de blog, noticias, comentarios." },
+        { nombre: "&lt;aside&gt;", tipo: "Complemento", desc: "Contenido relacionado indirectamente (barra lateral).", demo: "<aside style='background:#1e1e2e; padding:8px; border-radius:12px;'>💡 Tip: usa CSS Grid para layouts</aside>", codigo: "<aside>Barra lateral</aside>", teoria: "Suele ser una barra lateral, publicidad o información complementaria." },
+        { nombre: "&lt;select&gt;", tipo: "Desplegable", desc: "Lista de opciones desplegable.", demo: "<select style='background:#1e1e2e; color:white; padding:4px; border-radius:8px;'><option>Opción 1</option><option>Opción 2</option></select>", codigo: "<select><option>Valor</option></select>", teoria: "Permite elegir entre múltiples opciones. Se combina con &lt;option&gt;" },
+        { nombre: "&lt;textarea&gt;", tipo: "Área texto", desc: "Campo de texto multilínea.", demo: "<textarea rows='2' style='background:#1e1e2e; width:100%; border-radius:8px; padding:6px;' placeholder='Comentario...'></textarea>", codigo: "<textarea rows='4' cols='50'></textarea>", teoria: "Ideal para comentarios, mensajes largos o descripciones." },
+        { nombre: "&lt;strong&gt;", tipo: "Formato", desc: "Texto con fuerte énfasis (negrita semántica).", demo: "<strong>Texto importante y relevante</strong>", codigo: "<strong>Negrita semántica</strong>", teoria: "Indica importancia seria, no solo estilo visual." },
+        { nombre: "&lt;em&gt;", tipo: "Formato", desc: "Énfasis (cursiva semántica).", demo: "<em>Texto enfatizado</em>", codigo: "<em>cursiva semántica</em>", teoria: "Cambia la entonación al leer (lectores de pantalla)." },
+        { nombre: "&lt;br&gt;", tipo: "Salto", desc: "Salto de línea.", demo: "Línea 1<br>Línea 2<br>Línea 3", codigo: "Texto<br>Nueva línea", teoria: "Etiqueta autocontenida, no necesita cierre." },
+        { nombre: "&lt;hr&gt;", tipo: "Separador", desc: "Línea horizontal temática.", demo: "<hr style='border-color:#3b82f6;'>", codigo: "<hr>", teoria: "Separa contenido temáticamente o cambios de tema." },
+        { nombre: "&lt;main&gt;", tipo: "Principal", desc: "Contenido principal único del documento.", demo: "<main style='padding:6px; background:#1a1a2e; border-radius:12px;'>📖 Contenido principal</main>", codigo: "<main>...</main>", teoria: "Debe ser único por página. No incluir contenido repetitivo como navegación." },
+        { nombre: "&lt;figure&gt;", tipo: "Figura", desc: "Agrupa ilustraciones con caption.", demo: "<figure style='margin:0;'><img src='https://picsum.photos/id/1/80/50'><figcaption>Ejemplo</figcaption></figure>", codigo: "<figure><img><figcaption>Texto</figcaption></figure>", teoria: "Asocia imagen y pie de foto semánticamente." },
+        { nombre: "&lt;figcaption&gt;", tipo: "Pie figura", desc: "Título o descripción para figure.", demo: "<figcaption style='font-size:0.7rem;'>Imagen de ejemplo</figcaption>", codigo: "<figcaption>Descripción</figcaption>", teoria: "Va dentro de figure, justo después o antes de la imagen." },
+        { nombre: "&lt;details&gt;", tipo: "Desplegable", desc: "Crea un widget de detalles expandible.", demo: "<details><summary>Más información</summary><p>Contenido oculto que se muestra al hacer clic</p></details>", codigo: "<details><summary>Título</summary>Texto extra</details>", teoria: "Ideal para FAQ o contenido colapsable sin JavaScript." },
+        { nombre: "&lt;summary&gt;", tipo: "Resumen", desc: "Título visible del elemento details.", demo: "<summary>📌 Ver más</summary>", codigo: "<summary>Click aquí</summary>", teoria: "El elemento que se muestra siempre, al hacer clic expande/colapsa." },
+        { nombre: "&lt;mark&gt;", tipo: "Resaltado", desc: "Marca texto como resaltado.", demo: "<mark style='background:#facc15; color:black; padding:2px;'>Texto resaltado</mark>", codigo: "<mark>importante</mark>", teoria: "Color de fondo amarillo por defecto. Usado para referencias." },
+        { nombre: "&lt;small&gt;", tipo: "Texto pequeño", desc: "Letra pequeña (notas legales).", demo: "<small>Nota: contenido adicional</small>", codigo: "<small>texto pequeño</small>", teoria: "Representa comentarios laterales o letra pequeña." },
+        { nombre: "&lt;time&gt;", tipo: "Fecha/hora", desc: "Representa una fecha o tiempo.", demo: "<time datetime='2025-01-15'>15 de enero de 2025</time>", codigo: "<time datetime='2025-01-15'>fecha</time>", teoria: "Ayuda a motores de búsqueda a entender fechas." },
+        { nombre: "&lt;progress&gt;", tipo: "Progreso", desc: "Barra de progreso.", demo: "<progress value='70' max='100' style='width:150px;'></progress> 70%", codigo: "<progress value='50' max='100'></progress>", teoria: "Muestra el progreso de una tarea." },
+        { nombre: "&lt;meter&gt;", tipo: "Medidor", desc: "Representa un valor escalar dentro de un rango.", demo: "<meter value='0.8' min='0' max='1' style='width:120px;'></meter> 80%", codigo: "<meter value='0.6'>60%</meter>", teoria: "Útil para porcentajes, calificaciones, uso de disco." },
+        { nombre: "&lt;iframe&gt;", tipo: "Marco", desc: "Inserta contenido externo (videos, mapas).", demo: "<iframe srcdoc='<p>Contenido embedido</p>' style='width:100%; border:none; height:50px;'></iframe>", codigo: "<iframe src='https://ejemplo.com'></iframe>", teoria: "Permite incrustar páginas externas, videos de YouTube, mapas." },
+        { nombre: "&lt;audio&gt;", tipo: "Audio", desc: "Reproduce archivos de sonido.", demo: "<audio controls style='width:180px;'><source src='#' type='audio/mpeg'>Tu navegador no soporta audio</audio>", codigo: "<audio controls><source src='audio.mp3'></audio>", teoria: "Atributo controls muestra botones de reproducción." },
+        { nombre: "&lt;video&gt;", tipo: "Video", desc: "Reproduce videos.", demo: "<video controls style='width:200px; border-radius:12px;'><source src='#'>Video no soportado</video>", codigo: "<video width='320' controls><source src='video.mp4'></video>", teoria: "Soporta múltiples formatos: MP4, WebM, Ogg." },
+        { nombre: "&lt;canvas&gt;", tipo: "Canvas", desc: "Dibujo dinámico con JavaScript.", demo: "<canvas width='80' height='80' style='border:1px solid #3b82f6; border-radius:8px;'></canvas>", codigo: "<canvas id='miCanvas'></canvas>", teoria: "Requiere JS para dibujar gráficos, animaciones, juegos." },
+        { nombre: "&lt;svg&gt;", tipo: "Gráficos", desc: "Gráficos vectoriales escalables.", demo: "<svg width='60' height='60' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='#3b82f6'/></svg>", codigo: "<svg><circle cx='50' cy='50' r='40'/></svg>", teoria: "Dibuja formas vectoriales que no pierden calidad." },
+        { nombre: "&lt;datalist&gt;", tipo: "Autocompletar", desc: "Lista de opciones para input.", demo: "<input list='frutas' placeholder='Escribe...'><datalist id='frutas'><option>Manzana</option><option>Pera</option></datalist>", codigo: "<input list='lista'><datalist id='lista'><option>Valor</option></datalist>", teoria: "Proporciona autocompletado al usuario." },
+        { nombre: "&lt;fieldset&gt;", tipo: "Grupo formulario", desc: "Agrupa controles relacionados.", demo: "<fieldset style='border:1px solid #2d2d2d; border-radius:12px; padding:8px;'><legend>Datos personales</legend><input placeholder='Nombre'></fieldset>", codigo: "<fieldset><legend>Título</legend>...</fieldset>", teoria: "Agrupa elementos de formulario con un borde y leyenda." }
+    ];
+
+    function escapeHtml(str) {
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+
+    function renderEtiquetas() {
+        const grid = document.getElementById('etiquetas-grid');
+        if (!grid) return;
+        grid.innerHTML = '';
+        etiquetas.forEach(et => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div class="card-header">
+                    <code>${et.nombre}</code>
+                    <span style="background:#2d2d3a; font-size:0.7rem; padding:2px 8px; border-radius:20px;">${et.tipo}</span>
+                </div>
+                <div class="card-body">
+                    <p>${et.desc}</p>
+                    <div class="demo-mini">🎯 Ejemplo: ${et.demo}</div>
+                    <div class="explicacion-panel" id="exp-${et.nombre.replace(/[^a-zA-Z]/g, '')}">
+                        <div class="explicacion-texto"><strong>📖 Teoría completa:</strong> ${et.teoria}</div>
+                        <pre><code>${escapeHtml(et.codigo)}</code></pre>
+                        <p style="font-size:0.75rem; color:#94a3b8;">✅ Código listo para copiar y pegar</p>
+                    </div>
+                </div>
+            `;
+            card.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const panel = card.querySelector('.explicacion-panel');
+                if (panel) {
+                    panel.classList.toggle('show');
+                }
+            });
+            grid.appendChild(card);
+        });
+    }
+
+    // ==================== 32 MINI PROYECTOS ÚNICOS ====================
+    const proyectos = [
+        { id: "p1", nombre: "✨ Tarjeta de Perfil Animada", vista: `<div style="background:linear-gradient(145deg,#1e1e2e,#0f0f12); width:250px; border-radius:32px; padding:1.5rem; text-align:center; box-shadow:0 20px 35px -10px black;"><div style="width:85px;height:85px;background:linear-gradient(135deg,#3b82f6,#a855f7);border-radius:50%;margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:2.5rem;">👩‍💻</div><h3>Laura Sánchez</h3><p style="color:#94a3b8;">Frontend Developer</p><div style="display:flex;gap:8px;justify-content:center;margin-top:12px;"><span style="background:#2d2d3a;padding:4px 14px;border-radius:40px;">React</span><span style="background:#2d2d3a;padding:4px 14px;">CSS</span></div></div>`, codigo: `<div class="tarjeta-perfil">\n  <div class="avatar">👩‍💻</div>\n  <h3>Laura Sánchez</h3>\n  <p>Frontend Developer</p>\n  <div class="skills">\n    <span>React</span>\n    <span>CSS</span>\n  </div>\n</div>\n\n<style>\n.tarjeta-perfil {\n  background: linear-gradient(145deg, #1e1e2e, #0f0f12);\n  width: 250px;\n  border-radius: 32px;\n  padding: 1.5rem;\n  text-align: center;\n  box-shadow: 0 20px 35px -10px black;\n}\n.avatar {\n  width: 85px;\n  height: 85px;\n  background: linear-gradient(135deg, #3b82f6, #a855f7);\n  border-radius: 50%;\n  margin: 0 auto;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-size: 2.5rem;\n}\n.skills span {\n  background: #2d2d3a;\n  padding: 4px 14px;\n  border-radius: 40px;\n  display: inline-block;\n  margin: 4px;\n}\n</style>` },
+        { id: "p2", nombre: "⚡ Botón Neón Glow", vista: `<button style="background:transparent;border:2px solid #0ff;color:#0ff;padding:12px 32px;border-radius:60px;font-weight:bold;box-shadow:0 0 15px #0ff;transition:0.3s;cursor:pointer;" onmouseover="this.style.boxShadow='0 0 30px #0ff';this.style.transform='scale(1.05)'" onmouseout="this.style.boxShadow='0 0 15px #0ff';this.style.transform='scale(1)'">✨ NEÓN EFFECT</button>`, codigo: `<button class="btn-neon">✨ NEÓN EFFECT</button>\n<style>\n.btn-neon {\n  background: transparent;\n  border: 2px solid #0ff;\n  color: #0ff;\n  padding: 12px 32px;\n  border-radius: 60px;\n  box-shadow: 0 0 15px #0ff;\n  transition: 0.3s;\n  cursor: pointer;\n}\n.btn-neon:hover {\n  box-shadow: 0 0 30px #0ff;\n  transform: scale(1.05);\n}\n</style>` },
+        { id: "p3", nombre: "🎨 Galería de Colores Dinámica", vista: `<div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;"><div style="background:#ef4444;width:80px;height:80px;border-radius:20px;display:flex;align-items:center;justify-content:center;color:white;">Rojo</div><div style="background:#3b82f6;width:80px;height:80px;border-radius:20px;display:flex;align-items:center;justify-content:center;">Azul</div><div style="background:#10b981;width:80px;height:80px;border-radius:20px;display:flex;align-items:center;justify-content:center;">Verde</div><div style="background:#f59e0b;width:80px;height:80px;border-radius:20px;display:flex;align-items:center;justify-content:center;">Ámbar</div><div style="background:#ec4899;width:80px;height:80px;border-radius:20px;display:flex;align-items:center;justify-content:center;">Rosa</div></div>`, codigo: `<div class="galeria-colores">\n  <div class="color-card" style="background:#ef4444;">Rojo</div>\n  <div class="color-card" style="background:#3b82f6;">Azul</div>\n  <div class="color-card" style="background:#10b981;">Verde</div>\n</div>\n<style>\n.galeria-colores {\n  display: flex;\n  gap: 12px;\n  flex-wrap: wrap;\n  justify-content: center;\n}\n.color-card {\n  width: 80px;\n  height: 80px;\n  border-radius: 20px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: white;\n}\n</style>` },
+        { id: "p4", nombre: "📋 Lista de Tareas Interactiva", vista: `<div style="background:#111;border-radius:28px;padding:1.5rem;width:280px;"><h4 style="margin-bottom:1rem;">✅ Mis Tareas</h4><ul style="list-style:none;"><li style="display:flex;gap:12px;margin-bottom:12px;"><input type="checkbox"> Aprender Flexbox</li><li style="display:flex;gap:12px;margin-bottom:12px;"><input type="checkbox"> CSS Grid avanzado</li><li style="display:flex;gap:12px;"><input type="checkbox"> Proyecto final</li></ul><div style="margin-top:12px;background:#1e1e2e;padding:8px;border-radius:20px;text-align:center;font-size:0.8rem;">Checklist interactivo</div></div>`, codigo: `<div class="lista-tareas">\n  <h4>✅ Mis Tareas</h4>\n  <ul>\n    <li><input type="checkbox"> Aprender Flexbox</li>\n    <li><input type="checkbox"> CSS Grid</li>\n  </ul>\n</div>\n<style>\n.lista-tareas {\n  background: #111;\n  border-radius: 28px;\n  padding: 1.5rem;\n  width: 280px;\n}\n.lista-tareas li {\n  display: flex;\n  gap: 12px;\n  margin-bottom: 12px;\n}\n</style>` },
+        { id: "p5", nombre: "🌡️ Barra de Progreso Animada", vista: `<div style="width:280px;background:#2d2d3a;border-radius:30px;overflow:hidden;"><div style="width:78%;background:linear-gradient(90deg,#3b82f6,#a855f7);padding:10px;text-align:center;color:white;font-weight:bold;">78% Completado</div></div>`, codigo: `<div class="progress-container">\n  <div class="progress-bar" style="width:78%">78%</div>\n</div>\n<style>\n.progress-container {\n  width: 280px;\n  background: #2d2d3a;\n  border-radius: 30px;\n  overflow: hidden;\n}\n.progress-bar {\n  background: linear-gradient(90deg, #3b82f6, #a855f7);\n  padding: 10px;\n  text-align: center;\n  color: white;\n  font-weight: bold;\n}\n</style>` },
+        { id: "p6", nombre: "🔘 Switch Toggle Tema", vista: `<label style="display:flex;align-items:center;gap:12px;cursor:pointer;"><div style="width:60px;height:30px;background:#3b82f6;border-radius:30px;position:relative;"><div style="width:26px;height:26px;background:white;border-radius:50%;position:absolute;top:2px;right:2px;transition:0.2s;"></div></div><span>Modo oscuro/light</span></label>`, codigo: `<label class="switch">\n  <input type="checkbox">\n  <span class="slider"></span>\n</label>\n<style>\n.switch {\n  display: flex;\n  align-items: center;\n  gap: 12px;\n}\n.switch .slider {\n  width: 60px;\n  height: 30px;\n  background: #3b82f6;\n  border-radius: 30px;\n  position: relative;\n}\n.switch .slider::before {\n  content: "";\n  width: 26px;\n  height: 26px;\n  background: white;\n  border-radius: 50%;\n  position: absolute;\n  top: 2px;\n  right: 2px;\n}\n</style>` },
+        { id: "p7", nombre: "💳 Tarjeta de Producto", vista: `<div style="background:#1a1a2e;border-radius:28px;padding:1.2rem;width:220px;"><img src="https://picsum.photos/id/20/200/130" style="width:100%;border-radius:20px;"><h4 style="margin-top:10px;">🎧 Auriculares Pro X</h4><p style="color:#a855f7;font-size:1.3rem;">$49.99</p><button style="background:#3b82f6;border:none;padding:8px;width:100%;border-radius:40px;color:white;cursor:pointer;">Comprar ahora</button></div>`, codigo: `<div class="producto-card">\n  <img src="producto.jpg" alt="producto">\n  <h4>Auriculares Pro X</h4>\n  <p class="precio">$49.99</p>\n  <button>Comprar</button>\n</div>\n<style>\n.producto-card {\n  background: #1a1a2e;\n  border-radius: 28px;\n  padding: 1.2rem;\n  width: 220px;\n}\n.producto-card img {\n  width: 100%;\n  border-radius: 20px;\n}\n.precio {\n  color: #a855f7;\n  font-size: 1.3rem;\n}\nbutton {\n  background: #3b82f6;\n  border: none;\n  padding: 8px;\n  width: 100%;\n  border-radius: 40px;\n  color: white;\n  cursor: pointer;\n}\n</style>` },
+        { id: "p8", nombre: "🌀 Loading Spinner Animado", vista: `<div style="width:50px;height:50px;border:4px solid #334155;border-top-color:#3b82f6;border-radius:50%;animation:spin 1s infinite linear;"></div><style>@keyframes spin{to{transform:rotate(360deg)}}</style>`, codigo: `<div class="spinner"></div>\n<style>\n.spinner {\n  width: 50px;\n  height: 50px;\n  border: 4px solid #334155;\n  border-top-color: #3b82f6;\n  border-radius: 50%;\n  animation: spin 1s infinite linear;\n}\n@keyframes spin {\n  to { transform: rotate(360deg); }\n}\n</style>` },
+        { id: "p9", nombre: "💬 Cita Motivacional", vista: `<blockquote style="border-left:4px solid #facc15;background:#1e1e2e;padding:1.2rem;border-radius:20px;max-width:300px;"><p style="font-style:italic;font-size:1rem;">"El CSS es como la magia que da vida al diseño web"</p><p style="margin-top:10px;color:#94a3b8;">— Desarrolladora Frontend</p></blockquote>`, codigo: `<blockquote class="cita">\n  <p>"El CSS es la magia del diseño web"</p>\n  <cite>— Experto Dev</cite>\n</blockquote>\n<style>\n.cita {\n  border-left: 4px solid #facc15;\n  background: #1e1e2e;\n  padding: 1.2rem;\n  border-radius: 20px;\n  max-width: 300px;\n}\n.cite {\n  color: #94a3b8;\n  margin-top: 10px;\n}\n</style>` },
+        { id: "p10", nombre: "📱 Menú Hamburguesa CSS", vista: `<div style="background:#1e1e2e;padding:12px 20px;border-radius:40px;display:flex;justify-content:space-between;align-items:center;width:260px;"><span style="font-weight:bold;">Logo</span><div style="display:flex;flex-direction:column;gap:4px;cursor:pointer;"><div style="width:25px;height:3px;background:white;border-radius:2px;"></div><div style="width:25px;height:3px;background:white;border-radius:2px;"></div><div style="width:25px;height:3px;background:white;border-radius:2px;"></div></div></div>`, codigo: `<nav class="menu-hamburguesa">\n  <span class="logo">Logo</span>\n  <div class="hamburguesa">\n    <span></span><span></span><span></span>\n  </div>\n</nav>\n<style>\n.menu-hamburguesa {\n  background: #1e1e2e;\n  padding: 12px 20px;\n  border-radius: 40px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  width: 260px;\n}\n.hamburguesa {\n  display: flex;\n  flex-direction: column;\n  gap: 4px;\n  cursor: pointer;\n}\n.hamburguesa span {\n  width: 25px;\n  height: 3px;\n  background: white;\n  border-radius: 2px;\n}\n</style>` },
+        { id: "p11", nombre: "🔢 Contador de Clics", vista: `<div style="background:#1a1a2e;border-radius:28px;padding:1.5rem;text-align:center;width:200px;"><div style="font-size:2.5rem;font-weight:bold;margin-bottom:1rem;">0</div><button style="background:#3b82f6;border:none;padding:8px 20px;border-radius:40px;color:white;cursor:pointer;">Incrementar</button></div>`, codigo: `<div class="contador">\n  <div class="numero">0</div>\n  <button>Incrementar</button>\n</div>\n<style>\n.contador {\n  background: #1a1a2e;\n  border-radius: 28px;\n  padding: 1.5rem;\n  text-align: center;\n  width: 200px;\n}\n.numero {\n  font-size: 2.5rem;\n  font-weight: bold;\n  margin-bottom: 1rem;\n}\nbutton {\n  background: #3b82f6;\n  border: none;\n  padding: 8px 20px;\n  border-radius: 40px;\n  color: white;\n}\n</style>` },
+        { id: "p12", nombre: "🃏 Flip Card 3D", vista: `<div style="width:160px;height:160px;perspective:600px;"><div style="width:100%;height:100%;transition:0.5s;transform-style:preserve-3d;border-radius:20px;"><div style="position:absolute;width:100%;height:100%;background:#3b82f6;border-radius:20px;display:flex;align-items:center;justify-content:center;backface-visibility:hidden;">✨ Frontal</div><div style="position:absolute;width:100%;height:100%;background:#a855f7;border-radius:20px;display:flex;align-items:center;justify-content:center;transform:rotateY(180deg);backface-visibility:hidden;">🎴 Trasera</div></div></div><p style="margin-top:8px;">Hover para voltear</p><style>div[style*="perspective"]:hover > div { transform: rotateY(180deg); }</style>`, codigo: `<div class="flip-card">\n  <div class="flip-inner">\n    <div class="front">✨ Frontal</div>\n    <div class="back">🎴 Trasera</div>\n  </div>\n</div>\n<style>\n.flip-card {\n  width: 160px;\n  height: 160px;\n  perspective: 600px;\n}\n.flip-inner {\n  width: 100%;\n  height: 100%;\n  transition: 0.5s;\n  transform-style: preserve-3d;\n  border-radius: 20px;\n}\n.flip-card:hover .flip-inner {\n  transform: rotateY(180deg);\n}\n.front, .back {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  border-radius: 20px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  backface-visibility: hidden;\n}\n.front { background: #3b82f6; }\n.back { background: #a855f7; transform: rotateY(180deg); }\n</style>` },
+        { id: "p13", nombre: "⭐ Sistema de Rating Estrellas", vista: `<div style="display:flex;gap:8px;font-size:2rem;cursor:pointer;"><span style="color:#facc15;">★</span><span style="color:#facc15;">★</span><span style="color:#facc15;">★</span><span style="color:#475569;">★</span><span style="color:#475569;">★</span></div><p>3/5 estrellas</p>`, codigo: `<div class="rating">\n  <span>★</span><span>★</span><span>★</span><span>☆</span><span>☆</span>\n</div>\n<style>\n.rating {\n  display: flex;\n  gap: 8px;\n  font-size: 2rem;\n}\n.rating span:nth-child(-n+3) { color: #facc15; }\n.rating span:nth-child(n+4) { color: #475569; }\n</style>` },
+        { id: "p14", nombre: "📊 Gráfico de Habilidades", vista: `<div style="width:260px;"><p>HTML</p><div style="background:#2d2d3a;border-radius:20px;overflow:hidden;"><div style="width:90%;background:#3b82f6;padding:6px;border-radius:20px;text-align:center;">90%</div></div><p style="margin-top:10px;">CSS</p><div style="background:#2d2d3a;border-radius:20px;"><div style="width:85%;background:#a855f7;padding:6px;border-radius:20px;text-align:center;">85%</div></div></div>`, codigo: `<div class="skills-chart">\n  <p>HTML</p>\n  <div class="bar"><div style="width:90%">90%</div></div>\n  <p>CSS</p>\n  <div class="bar"><div style="width:85%">85%</div></div>\n</div>\n<style>\n.skills-chart { width: 260px; }\n.bar {\n  background: #2d2d3a;\n  border-radius: 20px;\n  overflow: hidden;\n}\n.bar div {\n  background: #3b82f6;\n  padding: 6px;\n  border-radius: 20px;\n  text-align: center;\n}\n</style>` },
+        { id: "p15", nombre: "🎚️ Slider de Rango", vista: `<div style="width:260px;"><input type="range" min="0" max="100" value="65" style="width:100%;accent-color:#3b82f6;"><p>Valor: 65%</p></div>`, codigo: `<input type="range" min="0" max="100" value="65" class="slider">\n<style>\n.slider {\n  width: 260px;\n  accent-color: #3b82f6;\n}\n</style>` },
+        { id: "p16", nombre: "📅 Calendario Mini", vista: `<div style="background:#1e1e2e;border-radius:24px;padding:1rem;width:240px;text-align:center;"><div style="background:#3b82f6;border-radius:20px;padding:6px;color:white;">Enero 2025</div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:10px;"><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span></div></div>`, codigo: `<div class="calendario">\n  <div class="mes">Enero 2025</div>\n  <div class="dias-semana">L M M J V S D</div>\n  <div class="numeros">1 2 3 4 5 6 7</div>\n</div>` },
+        { id: "p17", nombre: "🔍 Caja de Búsqueda Moderna", vista: `<div style="display:flex;gap:8px;"><input type="search" placeholder="Buscar..." style="background:#1e1e2e;border:1px solid #3b82f6;border-radius:40px;padding:10px 18px;color:white;width:220px;"><button style="background:#3b82f6;border:none;border-radius:40px;padding:10px 18px;color:white;">🔍</button></div>`, codigo: `<div class="search-box">\n  <input type="search" placeholder="Buscar...">\n  <button>🔍</button>\n</div>\n<style>\n.search-box {\n  display: flex;\n  gap: 8px;\n}\n.search-box input {\n  background: #1e1e2e;\n  border: 1px solid #3b82f6;\n  border-radius: 40px;\n  padding: 10px 18px;\n  color: white;\n  width: 220px;\n}\n.search-box button {\n  background: #3b82f6;\n  border: none;\n  border-radius: 40px;\n  padding: 10px 18px;\n  color: white;\n}\n</style>` },
+        { id: "p18", nombre: "🎯 Tooltip Personalizado", vista: `<div style="position:relative;display:inline-block;cursor:pointer;"><span style="border-bottom:1px dashed #3b82f6;">Pasa el mouse</span><div style="position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:#1e1e2e;padding:6px 12px;border-radius:12px;font-size:0.8rem;white-space:nowrap;display:none;">✨ Tooltip personalizado</div></div><style>div[style*="relative"]:hover > div { display: block; }</style>`, codigo: `<div class="tooltip-container">\n  <span>Texto con tooltip</span>\n  <div class="tooltip">Información extra</div>\n</div>\n<style>\n.tooltip-container {\n  position: relative;\n  display: inline-block;\n}\n.tooltip {\n  position: absolute;\n  bottom: 130%;\n  left: 50%;\n  transform: translateX(-50%);\n  background: #1e1e2e;\n  padding: 6px 12px;\n  border-radius: 12px;\n  font-size: 0.8rem;\n  white-space: nowrap;\n  display: none;\n}\n.tooltip-container:hover .tooltip {\n  display: block;\n}\n</style>` },
+        { id: "p19", nombre: "📦 Timeline Vertical", vista: `<div style="border-left:2px solid #3b82f6;padding-left:20px;margin-left:20px;"><div style="margin-bottom:20px;position:relative;"><div style="position:absolute;left:-28px;width:12px;height:12px;background:#3b82f6;border-radius:50%;"></div><strong>2023</strong><p>Inicio del proyecto</p></div><div style="margin-bottom:20px;position:relative;"><div style="position:absolute;left:-28px;width:12px;height:12px;background:#a855f7;border-radius:50%;"></div><strong>2024</strong><p>Lanzamiento versión 1.0</p></div></div>`, codigo: `<div class="timeline">\n  <div class="evento"><div class="punto"></div><strong>2023</strong><p>Inicio</p></div>\n  <div class="evento"><div class="punto"></div><strong>2024</strong><p>Lanzamiento</p></div>\n</div>` },
+        { id: "p20", nombre: "🌊 Ola CSS Animada", vista: `<div style="height:100px;background:#1e1e2e;border-radius:20px;overflow:hidden;position:relative;"><div style="position:absolute;bottom:0;width:200%;height:40px;background:#3b82f6;border-radius:50% 50% 0 0;animation:wave 2s infinite linear;"></div></div><style>@keyframes wave{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}</style>`, codigo: `<div class="wave-container">\n  <div class="wave"></div>\n</div>\n<style>\n.wave-container {\n  height: 100px;\n  background: #1e1e2e;\n  border-radius: 20px;\n  overflow: hidden;\n  position: relative;\n}\n.wave {\n  position: absolute;\n  bottom: 0;\n  width: 200%;\n  height: 40px;\n  background: #3b82f6;\n  border-radius: 50% 50% 0 0;\n  animation: wave 2s infinite linear;\n}\n@keyframes wave {\n  0% { transform: translateX(0); }\n  100% { transform: translateX(-50%); }\n}\n</style>` },
+        { id: "p21", nombre: "🎬 Tarjeta de Película", vista: `<div style="background:#1a1a2e;border-radius:24px;padding:1rem;width:220px;"><img src="https://picsum.photos/id/40/200/120" style="width:100%;border-radius:16px;"><h4 style="margin:10px 0 4px;">Duna: Parte 2</h4><p style="color:#94a3b8;font-size:0.8rem;">Ciencia ficción · 2024</p><div style="display:flex;gap:8px;margin-top:8px;"><span>⭐ 8.7</span><span>🎬 2h 46m</span></div></div>`, codigo: `<div class="movie-card">\n  <img src="poster.jpg">\n  <h4>Duna: Parte 2</h4>\n  <p>Ciencia ficción · 2024</p>\n  <div>⭐ 8.7 · 🎬 2h 46m</div>\n</div>` },
+        { id: "p22", nombre: "🏷️ Badges y Tags", vista: `<div style="display:flex;gap:10px;flex-wrap:wrap;"><span style="background:#3b82f6;padding:4px 12px;border-radius:40px;">HTML</span><span style="background:#a855f7;padding:4px 12px;border-radius:40px;">CSS</span><span style="background:#10b981;padding:4px 12px;border-radius:40px;">JavaScript</span><span style="background:#f59e0b;padding:4px 12px;border-radius:40px;">React</span></div>`, codigo: `<div class="badges">\n  <span class="badge">HTML</span>\n  <span class="badge">CSS</span>\n  <span class="badge">JavaScript</span>\n</div>\n<style>\n.badge {\n  padding: 4px 12px;\n  border-radius: 40px;\n  display: inline-block;\n}\n.badge:nth-child(1) { background: #3b82f6; }\n.badge:nth-child(2) { background: #a855f7; }\n.badge:nth-child(3) { background: #10b981; }\n</style>` },
+        { id: "p23", nombre: "🧮 Calculadora Simple UI", vista: `<div style="background:#0f0f12;border-radius:32px;padding:1rem;width:220px;"><div style="background:#1e1e2e;padding:12px;border-radius:20px;text-align:right;margin-bottom:12px;">0</div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;"><button style="background:#2d2d3a;border:none;padding:12px;border-radius:12px;color:white;">7</button><button style="background:#2d2d3a;">8</button><button style="background:#2d2d3a;">9</button><button style="background:#a855f7;">+</button><button>4</button><button>5</button><button>6</button><button>-</button><button>1</button><button>2</button><button>3</button><button>=</button></div></div>`, codigo: `<div class="calculadora">\n  <div class="pantalla">0</div>\n  <div class="botones">\n    <button>7</button><button>8</button><button>9</button><button>+</button>\n    <button>4</button><button>5</button><button>6</button><button>-</button>\n    <button>1</button><button>2</button><button>3</button><button>=</button>\n  </div>\n</div>` },
+        { id: "p24", nombre: "📝 Lista de Compras", vista: `<div style="background:#1e1e2e;border-radius:24px;padding:1.2rem;width:250px;"><h4>🛒 Lista de compras</h4><ul style="margin-top:12px;"><li>✅ Manzanas</li><li>✅ Pan</li><li>⬜ Leche</li><li>⬜ Huevos</li></ul></div>`, codigo: `<div class="shopping-list">\n  <h4>🛒 Lista de compras</h4>\n  <ul>\n    <li>✅ Manzanas</li>\n    <li>✅ Pan</li>\n    <li>⬜ Leche</li>\n  </ul>\n</div>` },
+        { id: "p25", nombre: "🎹 Teclado CSS Visual", vista: `<div style="display:flex;gap:4px;justify-content:center;"><div style="background:#1e1e2e;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:12px;">W</div><div style="background:#1e1e2e;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:12px;">A</div><div style="background:#1e1e2e;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:12px;">S</div><div style="background:#1e1e2e;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:12px;">D</div></div>`, codigo: `<div class="teclado">\n  <div class="key">W</div><div class="key">A</div><div class="key">S</div><div class="key">D</div>\n</div>\n<style>\n.teclado { display: flex; gap: 4px; }\n.key {\n  background: #1e1e2e;\n  width: 40px;\n  height: 40px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  border-radius: 12px;\n}\n</style>` },
+        { id: "p26", nombre: "💡 Tarjeta de Consejo", vista: `<div style="background:linear-gradient(135deg,#1e1e2e,#0f0f12);border-radius:24px;padding:1.2rem;width:260px;border-left:4px solid #facc15;"><p style="font-size:0.9rem;">💡 Tip del día: Usa variables CSS para mantener consistencia en tus colores.</p></div>`, codigo: `<div class="tip-card">\n  <p>💡 Tip del día: Usa variables CSS</p>\n</div>` },
+        { id: "p27", nombre: "📎 Área de Subida de Archivos", vista: `<div style="border:2px dashed #3b82f6;border-radius:24px;padding:1.5rem;text-align:center;width:260px;">📁 Arrastra o haz clic para subir archivos</div>`, codigo: `<div class="upload-area">\n  📁 Arrastra o haz clic para subir\n</div>\n<style>\n.upload-area {\n  border: 2px dashed #3b82f6;\n  border-radius: 24px;\n  padding: 1.5rem;\n  text-align: center;\n  width: 260px;\n}\n</style>` },
+        { id: "p28", nombre: "🕹️ Botones Redes Sociales", vista: `<div style="display:flex;gap:12px;"><button style="background:#1877f2;border:none;border-radius:40px;padding:8px 16px;color:white;">f</button><button style="background:#1da1f2;border:none;border-radius:40px;padding:8px 16px;">🐦</button><button style="background:#e4405f;border:none;border-radius:40px;padding:8px 16px;">📷</button></div>`, codigo: `<div class="social-buttons">\n  <button>f</button><button>🐦</button><button>📷</button>\n</div>` },
+        { id: "p29", nombre: "🎨 Paleta de Colores", vista: `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:200px;"><div style="background:#ef4444;height:50px;border-radius:12px;"></div><div style="background:#3b82f6;height:50px;border-radius:12px;"></div><div style="background:#10b981;height:50px;border-radius:12px;"></div><div style="background:#f59e0b;height:50px;border-radius:12px;"></div><div style="background:#ec4899;height:50px;border-radius:12px;"></div><div style="background:#a855f7;height:50px;border-radius:12px;"></div></div>`, codigo: `<div class="paleta">\n  <div style="background:#ef4444"></div>\n  <div style="background:#3b82f6"></div>\n  <div style="background:#10b981"></div>\n</div>` },
+        { id: "p30", nombre: "📊 Donut Chart CSS", vista: `<div style="width:80px;height:80px;border-radius:50%;background:conic-gradient(#3b82f6 0deg 216deg, #2d2d3a 216deg 360deg);"></div><p>60% completado</p>`, codigo: `<div class="donut"></div>\n<style>\n.donut {\n  width: 80px;\n  height: 80px;\n  border-radius: 50%;\n  background: conic-gradient(#3b82f6 0deg 216deg, #2d2d3a 216deg 360deg);\n}\n</style>` },
+        { id: "p31", nombre: "🔔 Notificación Toast", vista: `<div style="background:#1e1e2e;border-radius:40px;padding:10px 20px;display:inline-flex;gap:10px;align-items:center;border-left:3px solid #10b981;">✅ ¡Acción completada correctamente!</div>`, codigo: `<div class="toast">✅ ¡Acción completada!</div>\n<style>\n.toast {\n  background: #1e1e2e;\n  border-radius: 40px;\n  padding: 10px 20px;\n  display: inline-flex;\n  gap: 10px;\n  border-left: 3px solid #10b981;\n}\n</style>` },
+        { id: "p32", nombre: "🎉 Confeti Animado CSS", vista: `<div style="text-align:center;padding:1rem;"><div style="font-size:3rem;animation:shake 0.5s infinite;">🎉</div><p>¡Felicidades!</p><style>@keyframes shake{0%{transform:rotate(0deg)}50%{transform:rotate(15deg)}100%{transform:rotate(0deg)}}</style></div>`, codigo: `<div class="confeti">🎉</div>\n<style>\n.confeti {\n  font-size: 3rem;\n  animation: shake 0.5s infinite;\n  text-align: center;\n}\n@keyframes shake {\n  0% { transform: rotate(0deg); }\n  50% { transform: rotate(15deg); }\n  100% { transform: rotate(0deg); }\n}\n</style>` }
+    ];
+
+    let currentProyecto = "p1";
+    
+    function renderProyecto(id) {
+        const proy = proyectos.find(p => p.id === id);
+        if (!proy) return;
+        const contenedor = document.getElementById('proyecto-contenedor');
+        if (contenedor) {
+            contenedor.innerHTML = `
+                <div class="preview-header">
+                    <span>📁 ${proy.nombre}</span>
+                    <span style="background:#2d2d3a;padding:2px 12px;border-radius:20px;">Código listo para copiar</span>
+                </div>
+                <div class="vista-previa">
+                    ${proy.vista}
+                </div>
+                <div class="codigo-proyecto">
+                    <strong style="color:white; display:block; margin-bottom:12px;">📜 CÓDIGO COMPLETO DEL PROYECTO</strong>
+                    <pre><code>${escapeHtml(proy.codigo)}</code></pre>
+                </div>
+            `;
+        }
+    }
+
+    function renderListaProyectos() {
+        const contenedor = document.getElementById('proyectos-lista');
+        if (!contenedor) return;
+        contenedor.innerHTML = '';
+        proyectos.forEach(proy => {
+            const btn = document.createElement('button');
+            btn.className = 'btn-proyecto';
+            if (proy.id === currentProyecto) btn.classList.add('active');
+            btn.textContent = proy.nombre;
+            btn.dataset.id = proy.id;
+            btn.addEventListener('click', () => {
+                currentProyecto = proy.id;
+                document.querySelectorAll('.btn-proyecto').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderProyecto(currentProyecto);
+            });
+            contenedor.appendChild(btn);
+        });
+        renderProyecto(currentProyecto);
+    }
+
+    renderEtiquetas();
+    renderListaProyectos();
+</script>
+</body>
+</html>
