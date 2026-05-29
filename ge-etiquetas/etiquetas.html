@@ -3,427 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masterclass HTML & CSS: La Guía Definitiva</title>
+    <title>Enciclopedia HTML & CSS - Versión Estática Nativa</title>
     <style>
-        /* --- VARIABLES Y CONFIGURACIÓN BASE --- */
+        /* --- CONFIGURACIÓN DE COLORES Y ESTRUCTURA --- */
         :root {
-            --bg-principal: #0f172a;
-            --bg-secundario: #1e293b;
-            --texto-principal: #f8fafc;
-            --texto-mutado: #94a3b8;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
             --accent: #38bdf8;
-            --accent-hover: #7dd3fc;
-            --codigo-bg: #020617;
-            --borde: #334155;
+            --accent-green: #34d399;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --code-bg: #020617;
+            --border: #334155;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, -apple-system, sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-main); display: flex; min-height: 100vh; }
 
-        body {
-            background-color: var(--bg-principal);
-            color: var(--texto-principal);
-            display: flex;
-            min-height: 100vh;
-        }
-
-        /* --- LAYOUT DE LA ACADEMIA (Sidebar + Contenido) --- */
+        /* --- BARRA LATERAL (MENÚ) --- */
         aside {
-            width: 300px;
-            background-color: var(--bg-secundario);
-            border-right: 1px solid var(--borde);
+            width: 320px;
+            background-color: #111827;
+            border-right: 1px solid var(--border);
             position: fixed;
             height: 100vh;
             overflow-y: auto;
             padding: 2rem 1rem;
         }
 
-        main {
-            margin-left: 300px;
-            flex: 1;
-            padding: 3rem;
-            max-width: 1200px;
-        }
+        .logo { font-size: 1.3rem; font-weight: bold; color: var(--accent); margin-bottom: 2rem; }
+        .menu-titulo { font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); margin: 1.5rem 0 0.5rem 0; letter-spacing: 1px; }
+        .menu-links { list-style: none; }
+        .menu-links a { display: block; color: #cbd5e1; text-decoration: none; padding: 0.5rem; border-radius: 6px; font-size: 0.9rem; transition: 0.2s; }
+        .menu-links a:hover { background: var(--bg-card); color: var(--accent); }
 
-        /* --- MENÚ DE NAVEGACIÓN --- */
-        .logo {
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: var(--accent);
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+        /* --- CONTENIDO PRINCIPAL --- */
+        main { margin-left: 320px; flex: 1; padding: 3rem; max-width: 1200px; }
+        h1 { color: var(--accent); margin-bottom: 1rem; }
+        h2 { font-size: 1.8rem; margin: 3rem 0 1rem 0; border-bottom: 2px solid var(--border); padding-bottom: 0.5rem; }
+        p { color: var(--text-muted); line-height: 1.6; margin-bottom: 1.5rem; }
 
-        .menu-seccion {
-            margin-bottom: 1.5rem;
-        }
-
-        .menu-titulo {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            color: var(--texto-mutado);
-            letter-spacing: 0.1rem;
-            margin-bottom: 0.5rem;
-            padding-left: 0.5rem;
-        }
-
-        .menu-links {
-            list-style: none;
-        }
-
-        .menu-links a {
-            display: block;
-            color: var(--texto-principal);
-            text-decoration: none;
-            padding: 0.6rem 0.5rem;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            font-size: 0.95rem;
-        }
-
-        .menu-links a:hover {
-            background-color: var(--bg-principal);
-            color: var(--accent);
-            padding-left: 0.8rem;
-        }
-
-        /* --- COMPONENTES DE EXPLICACIÓN DE ETIQUETAS --- */
-        h1 { font-size: 2.5rem; margin-bottom: 1rem; color: var(--accent); }
-        h2 { font-size: 1.8rem; margin: 2.5rem 0 1rem 0; border-bottom: 2px solid var(--borde); padding-bottom: 0.5rem; }
-        h3 { font-size: 1.3rem; margin: 1.5rem 0 0.5rem 0; color: var(--accent-hover); }
-        p { color: var(--texto-mutado); line-height: 1.6; margin-bottom: 1rem; }
-
-        .tabla-etiquetas {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            background-color: var(--bg-secundario);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .tabla-etiquetas th, .tabla-etiquetas td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--borde);
-        }
-
-        .tabla-etiquetas th {
-            background-color: #111827;
-            color: var(--accent);
-        }
-
-        .etiqueta-badge {
-            background-color: var(--codigo-bg);
-            color: #f43f5e;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-family: monospace;
-            font-size: 0.9rem;
-        }
-
-        /* --- SISTEMA DE MINIPROYECTOS INTERACTIVOS (SOLO CSS) --- */
-        .proyecto-card {
-            background-color: var(--bg-secundario);
-            border: 1px solid var(--borde);
+        /* --- SISTEMA COMPLETO DE PESTAÑAS (HTML/CSS PURO) --- */
+        .workspace-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
             border-radius: 12px;
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
             overflow: hidden;
         }
 
-        .proyecto-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--borde);
-        }
+        .card-header { padding: 1.5rem; border-bottom: 1px solid var(--border); }
+        .card-header h3 { color: var(--accent); margin-bottom: 0.3rem; }
 
-        /* Tabs con Inputs ocultos */
-        .tab-contenedor {
-            display: flex;
-            flex-direction: column;
-        }
+        /* Pestañas Controladoras */
+        .tab-container { display: flex; flex-direction: column; }
+        .tab-input { display: none; } /* Ocultamos los checkboxes de radio */
+        
+        .tab-nav { display: flex; background-color: #0b0f19; border-bottom: 1px solid var(--border); }
+        .tab-nav label { padding: 1rem 1.5rem; cursor: pointer; font-weight: 600; font-size: 0.9rem; border-right: 1px solid var(--border); transition: 0.2s; }
+        .tab-nav label:hover { background-color: #141b2d; }
 
-        .tab-inputs { display: none; }
+        .tab-paneles { background-color: var(--code-bg); min-height: 250px; position: relative; }
+        .panel-codigo, .panel-ejecucion { display: none; padding: 1.5rem; overflow-auto: auto; }
 
-        .tab-botones {
-            display: flex;
-            background-color: #111827;
-            border-bottom: 1px solid var(--borde);
-        }
-
-        .tab-botones label {
-            padding: 1rem 2rem;
-            cursor: pointer;
-            transition: background 0.3s;
-            border-right: 1px solid var(--borde);
-            font-weight: 600;
-        }
-
-        .tab-botones label:hover {
-            background-color: var(--bg-secundario);
-        }
-
-        .tab-contenido {
-            display: none;
-            padding: 1.5rem;
-            background-color: var(--codigo-bg);
-            min-height: 200px;
-        }
-
-        /* Lógica de CSS para alternar pestañas */
-        #tab-code-1:checked ~ .tab-botones label[for="tab-code-1"],
-        #tab-code-2:checked ~ .tab-botones label[for="tab-code-2"] {
-            background-color: var(--bg-secundario);
+        /* LÓGICA DE VISUALIZACIÓN DE PESTAÑAS SIN JAVASCRIPT */
+        /* Para el Bloque 1 (Etiqueta DIV) */
+        #code-b1:checked ~ .tab-nav label[for="code-b1"],
+        #preview-b1:checked ~ .tab-nav label[for="preview-b1"],
+        /* Para el Bloque 2 (Propiedad Flexbox) */
+        #code-b2:checked ~ .tab-nav label[for="code-b2"],
+        #preview-b2:checked ~ .tab-nav label[for="preview-b2"],
+        /* Para el Bloque 3 (Proyecto 1: Tarjeta Neon) */
+        #code-b3:checked ~ .tab-nav label[for="code-b3"],
+        #preview-b3:checked ~ .tab-nav label[for="preview-b3"] {
+            background-color: var(--bg-card);
             color: var(--accent);
             border-bottom: 2px solid var(--accent);
         }
 
-        #tab-preview-1:checked ~ .tab-botones label[for="tab-preview-1"],
-        #tab-preview-2:checked ~ .tab-botones label[for="tab-preview-2"] {
-            background-color: var(--bg-secundario);
-            color: var(--accent);
-            border-bottom: 2px solid var(--accent);
-        }
-
-        #tab-code-1:checked ~ .tab-paneles #panel-code-1,
-        #tab-preview-1:checked ~ .tab-paneles #panel-preview-1,
-        #tab-code-2:checked ~ .tab-paneles #panel-code-2,
-        #tab-preview-2:checked ~ .tab-paneles #panel-preview-2 {
+        #code-b1:checked ~ .tab-paneles #p-code-b1,
+        #preview-b1:checked ~ .tab-paneles #p-preview-b1,
+        #code-b2:checked ~ .tab-paneles #p-code-b2,
+        #preview-b2:checked ~ .tab-paneles #p-preview-b2,
+        #code-b3:checked ~ .tab-paneles #p-code-b3,
+        #preview-b3:checked ~ .tab-paneles #p-preview-b3 {
             display: block;
         }
 
-        pre {
-            color: #e2e8f0;
-            overflow-x: auto;
-            font-family: 'Courier New', Courier, monospace;
-            line-height: 1.4;
-        }
-
-        /* --- VISTA PREVIVIALIZADA DE LOS PROYECTOS (Aislada por CSS) --- */
-        .preview-box {
-            background: white;
-            color: #333;
+        /* Estilos de código */
+        pre { color: #e2e8f0; font-family: 'Courier New', Courier, monospace; line-height: 1.5; white-space: pre-wrap; }
+        
+        /* Contenedor de visualización en vivo aislada */
+        .live-demo-box {
+            background: #ffffff;
+            color: #000000;
+            padding: 3rem;
             border-radius: 8px;
-            padding: 2rem;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* --- ESTILOS EN VIVO PARA PROYECTO 1: TARJETA DE PERFIL --- */
-        .p1-card {
-            background: #ffffff;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            overflow: hidden;
-            width: 300px;
+        /* --- MINI PROYECTO 1 ESTILOS INTERNOS (EJECUTADOS) --- */
+        .neon-card {
+            background: #111827;
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            width: 280px;
             text-align: center;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #38bdf8;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
         }
-        .p1-banner { height: 100px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        .p1-avatar { width: 90px; height: 90px; border-radius: 50%; background: #cbd5e1; margin: -45px auto 1rem auto; border: 4px solid white; }
-        .p1-info { padding: 0 1.5rem 1.5rem 1.5rem; }
-        .p1-nombre { font-size: 1.25rem; font-weight: bold; color: #1e293b; }
-        .p1-puesto { color: #64748b; font-size: 0.9rem; margin-bottom: 1rem; }
-        .p1-btn { background: #4f46e5; color: white; border: none; padding: 0.6rem 1.5rem; border-radius: 20px; cursor: pointer; font-weight: bold; }
-
-        /* --- ESTILOS EN VIVO PARA PROYECTO 2: FORMULARIO MODERNO --- */
-        .p2-form-container { width: 100%; max-width: 400px; background: #f8fafc; padding: 2rem; border-radius: 12px; border: 1px solid #e2e8f0;}
-        .p2-group { margin-bottom: 1.2rem; }
-        .p2-label { display: block; margin-bottom: 0.4rem; color: #334155; font-weight: 600; font-size: 0.9rem;}
-        .p2-input { width: 100%; padding: 0.75rem; border: 2px solid #cbd5e1; border-radius: 6px; outline: none; transition: border 0.3s; }
-        .p2-input:focus { border-color: #06b6d4; }
-        .p2-btn { width: 100%; background: #06b6d4; color: white; border: none; padding: 0.8rem; border-radius: 6px; font-weight: bold; cursor: pointer; }
+        .neon-btn {
+            margin-top: 1rem;
+            background: #38bdf8;
+            color: #111827;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
 
     <aside>
-        <div class="logo">
-            <span>⚡</span> DevMaster Academy
-        </div>
+        <div class="logo">⚡ DevEncyclopedia</div>
         
-        <nav class="menu-seccion">
-            <p class="menu-titulo">Documentación HTML</p>
-            <ul class="menu-links">
-                <li><a href="#html-estructura">Estructura Base</a></li>
-                <li><a href="#html-texto">Formatos de Texto</a></li>
-                <li><a href="#html-formularios">Formularios y Tablas</a></li>
-            </ul>
-        </nav>
+        <p class="menu-titulo">Etiquetas HTML5</p>
+        <ul class="menu-links">
+            <li><a href="#sec-div">&lt;div&gt; - Contenedor</a></li>
+        </ul>
 
-        <nav class="menu-seccion">
-            <p class="menu-titulo">Documentación CSS</p>
-            <ul class="menu-links">
-                <li><a href="#css-selectores">Selectores Básicos</a></li>
-                <li><a href="#css-layout">Flexbox y Grid</a></li>
-            </ul>
-        </nav>
+        <p class="menu-titulo">Propiedades CSS3</p>
+        <ul class="menu-links">
+            <li><a href="#sec-flex">display: flex</a></li>
+        </ul>
 
-        <nav class="menu-seccion">
-            <p class="menu-titulo">Laboratorio de Proyectos</p>
-            <ul class="menu-links">
-                <li><a href="#mini-proyecto-1">1. Tarjeta de Perfil Pro</a></li>
-                <li><a href="#mini-proyecto-2">2. Formulario UI Moderno</a></li>
-            </ul>
-        </nav>
+        <p class="menu-titulo">Laboratorio (100+ Proy)</p>
+        <ul class="menu-links">
+            <li><a href="#proy-1" style="color: var(--accent-green);">🟢 Proy 1: Tarjeta Neón</a></li>
+            <li><a href="#">🟡 Proy 2: Próximamente...</a></li>
+            <li><a href="#">🟡 Proy 3: Próximamente...</a></li>
+            <li><a href="#">... Hasta Proy 100</a></li>
+        </ul>
     </aside>
 
     <main>
-        <h1>Aprende HTML y CSS con Código Vivo</h1>
-        <p>Bienvenido al entorno de desarrollo definitivo. Aquí tienes un desglose del comportamiento de las etiquetas estructurales, propiedades de diseño y cómo se entrelazan para dar vida a interfaces web profesionales.</p>
+        <h1>Consola de Aprendizaje Web</h1>
+        <p>Inspecciona la sintaxis pura a la izquierda y observa cómo reacciona el motor gráfico del navegador de forma nativa a la derecha.</p>
 
-        <section id="html-estructura">
-            <h2>Estructura General de HTML5</h2>
-            <p>HTML (HyperText Markup Language) estructura el esqueleto de cualquier sitio. Estas son las etiquetas fundamentales organizadas por funcionalidad:</p>
-            
-            <table class="tabla-etiquetas">
-                <thead>
-                    <tr>
-                        <th>Etiqueta</th>
-                        <th>Categoría</th>
-                        <th>Función Principal</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span class="etiqueta-badge">&lt;html&gt;</span></td>
-                        <td>Raíz</td>
-                        <td>Envuelve todo el documento web. Indica el inicio y fin del documento.</td>
-                    </tr>
-                    <tr>
-                        <td><span class="etiqueta-badge">&lt;head&gt;</span></td>
-                        <td>Metadatos</td>
-                        <td>Contiene información invisible para el usuario (SEO, links a CSS, codificación UTF-8).</td>
-                    </tr>
-                    <tr>
-                        <td><span class="etiqueta-badge">&lt;body&gt;</span></td>
-                        <td>Estructura</td>
-                        <td>Contiene toda la parte visual, textos, imágenes y secciones legibles de la web.</td>
-                    </tr>
-                    <tr>
-                        <td><span class="etiqueta-badge">&lt;header&gt;, &lt;nav&gt;, &lt;footer&gt;</span></td>
-                        <td>Semántica</td>
-                        <td>Definen el encabezado, menú de navegación y pie de página de forma legible para buscadores.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <section id="html-texto">
-            <h3>Formatos y Contenedores</h3>
-            <table class="tabla-etiquetas">
-                <tbody>
-                    <tr>
-                        <td><span class="etiqueta-badge">&lt;h1&gt; a &lt;h6&gt;</span></td>
-                        <td>Títulos. Va desde el más importante (h1) al menos importante (h6).</td>
-                    </tr>
-                    <tr>
-                        <td><span class="etiqueta-badge">&lt;p&gt;</span></td>
-                        <td>Párrafos. Define bloques de texto estándar con espaciados automáticos.</td>
-                    </tr>
-                    <tr>
-                        <td><span class="etiqueta-badge">&lt;div&gt;</span></td>
-                        <td>Contenedor genérico en bloque. Usado exclusivamente para aplicar estilos CSS.</td>
-                    </tr>
-                    <tr>
-                        <td><span class="etiqueta-badge">&lt;span&gt;</span></td>
-                        <td>Contenedor genérico en línea. Útil para dar estilo a palabras específicas dentro de un texto.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <section id="css-selectores">
-            <h2>Propiedades Esenciales de CSS</h2>
-            <p>CSS (Cascading Style Sheets) maneja toda la capa visual. Se basa en reglas compuestas por un selector y propiedades de diseño.</p>
-
-            <table class="tabla-etiquetas">
-                <thead>
-                    <tr>
-                        <th>Propiedad CSS</th>
-                        <th>Uso</th>
-                        <th>Ejemplo / Explicación</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span class="etiqueta-badge">display: flex;</span></td>
-                        <td>Diseño Flexbox</td>
-                        <td>Alinea elementos hijos en filas o columnas de forma dinámica y responsiva.</td>
-                    </tr>
-                    <tr>
-                        <td><span class="etiqueta-badge">grid-template-columns</span></td>
-                        <td>Diseño CSS Grid</td>
-                        <td>Crea rejillas o cuadrículas bidimensionales perfectas con filas y columnas exactas.</td>
-                    </tr>
-                    <tr>
-                        <td><span class="etiqueta-badge">margin</span> vs <span class="etiqueta-badge">padding</span></td>
-                        <td>Modelo de Caja</td>
-                        <td><strong>Margin</strong> añade espacio externo a la caja; <strong>Padding</strong> añade espacio interno.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-
-        <section id="mini-proyecto-1">
-            <h2>Laboratorio: Mini Proyectos Prácticos</h2>
-            <p>A continuación se muestran combinaciones reales de estas etiquetas estructurales y de diseño mediante componentes UI aislados.</p>
-
-            <div class="proyecto-card">
-                <div class="proyecto-header">
-                    <h3>Proyecto 1: Tarjeta de Perfil Profesional</h3>
-                    <p>Uso de: Box-Shadow, Bordes redondeados, Flexbox y Márgenes negativos.</p>
+        <section id="sec-div">
+            <h2>Módulo de Etiquetas HTML</h2>
+            <div class="workspace-card">
+                <div class="card-header">
+                    <h3>Etiqueta &lt;div&gt;</h3>
+                    <p>Elemento estructural base que define una división o sección en bloque dentro del cuerpo de la web.</p>
                 </div>
-
-                <div class="tab-contenedor">
-                    <input type="radio" name="p1-tabs" id="tab-code-1" class="tab-inputs" checked>
-                    <input type="radio" name="p1-tabs" id="tab-preview-1" class="tab-inputs">
-
-                    <div class="tab-botones">
-                        <label for="tab-code-1">Ver Código (HTML & CSS)</label>
-                        <label for="tab-preview-1">Resultado en Vivo</label>
+                
+                <div class="tab-container">
+                    <input type="radio" name="b1-tabs" id="code-b1" class="tab-input" checked>
+                    <input type="radio" name="b1-tabs" id="preview-b1" class="tab-input">
+                    
+                    <div class="tab-nav">
+                        <label for="code-b1">Código Sin Ejecutar (Texto)</label>
+                        <label for="preview-b1">Código Ejecutado (En Vivo)</label>
                     </div>
 
                     <div class="tab-paneles">
-                        <div class="tab-contenido" id="panel-code-1">
-<pre>
-<code>
-&lt;!-- HTML Estructural --&gt;
-&lt;div class="p1-card"&gt;
-    &lt;div class="p1-banner"&gt;&lt;/div&gt;
-    &lt;div class="p1-avatar"&gt;&lt;/div&gt;
-    &lt;div class="p1-info"&gt;
-        &lt;div class="p1-nombre"&gt;Alex Dev&lt;/div&gt;
-        &lt;div class="p1-puesto"&gt;Full Stack Engineer&lt;/div&gt;
-        &lt;button class="p1-btn"&gt;Seguir&lt;/button&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-
-/* CSS Aplicado */
-.p1-card { background: #ffffff; border-radius: 15px; width: 300px; text-align: center; overflow: hidden; }
-.p1-banner { height: 100px; background: linear-gradient(135deg, #667eea, #764ba2); }
-.p1-avatar { width: 90px; height: 90px; border-radius: 50%; margin: -45px auto 1rem auto; border: 4px solid white; }
-.p1-btn { background: #4f46e5; color: white; padding: 0.6rem 1.5rem; border-radius: 20px; cursor: pointer; }
-</code>
-</pre>
+                        <div class="panel-codigo" id="p-code-b1">
+                            <pre><code>&lt;div style="background: #f43f5e; color: white; padding: 15px; border-radius: 6px; text-align: center;"&gt;\n    Este es un contenedor DIV con estilos de bloque en línea.\n&lt;/div&gt;</code></pre>
                         </div>
-                        <div class="tab-contenido" id="panel-preview-1">
-                            <div class="preview-box">
-                                <div class="p1-card">
-                                    <div class="p1-banner"></div>
-                                    <div class="p1-avatar"></div>
-                                    <div class="p1-info">
-                                        <div class="p1-nombre">Alex Dev</div>
-                                        <div class="p1-puesto">Full Stack Engineer</div>
-                                        <button class="p1-btn">Seguir</button>
-                                    </div>
+                        <div class="panel-ejecucion" id="p-preview-b1">
+                            <div class="live-demo-box">
+                                <div style="background: #f43f5e; color: white; padding: 15px; border-radius: 6px; text-align: center; width: 100%;">
+                                    Este es un contenedor DIV con estilos de bloque en línea.
                                 </div>
                             </div>
                         </div>
@@ -432,51 +188,67 @@
             </div>
         </section>
 
-        <section id="mini-proyecto-2">
-            <div class="proyecto-card">
-                <div class="proyecto-header">
-                    <h3>Proyecto 2: Formulario de Registro con Input Focus</h3>
-                    <p>Uso de: Selectores de pseudoclase (:focus), Inputs de texto y transiciones suaves.</p>
+        <section id="sec-flex">
+            <h2>Módulo de Propiedades CSS</h2>
+            <div class="workspace-card">
+                <div class="card-header">
+                    <h3>Propiedad display: flex;</h3>
+                    <p>Habilita el modelo de caja flexible (Flexbox) para alinear componentes hijos de forma horizontal o vertical automáticamente.</p>
                 </div>
-
-                <div class="tab-contenedor">
-                    <input type="radio" name="p2-tabs" id="tab-code-2" class="tab-inputs" checked>
-                    <input type="radio" name="p2-tabs" id="tab-preview-2" class="tab-inputs">
-
-                    <div class="tab-botones">
-                        <label for="tab-code-2">Ver Código (HTML & CSS)</label>
-                        <label for="tab-preview-2">Resultado en Vivo</label>
+                
+                <div class="tab-container">
+                    <input type="radio" name="b2-tabs" id="code-b2" class="tab-input" checked>
+                    <input type="radio" name="b2-tabs" id="preview-b2" class="tab-input">
+                    
+                    <div class="tab-nav">
+                        <label for="code-b2">Código Sin Ejecutar (Texto)</label>
+                        <label for="preview-b2">Código Ejecutado (En Vivo)</label>
                     </div>
 
                     <div class="tab-paneles">
-                        <div class="tab-contenido" id="panel-code-2">
-<pre>
-<code>
-&lt;!-- HTML Estructural --&gt;
-&lt;div class="p2-form-container"&gt;
-    &lt;div class="p2-group"&gt;
-        &lt;label class="p2-label"&gt;Correo Electrónico&lt;/label&gt;
-        &lt;input type="email" class="p2-input" placeholder="tu@email.com"&gt;
-    &lt;/div&gt;
-    &lt;button class="p2-btn"&gt;Crear Cuenta&lt;/button&gt;
-&lt;/div&gt;
-
-/* CSS Aplicado */
-.p2-form-container { width: 100%; max-width: 400px; background: #f8fafc; padding: 2rem; border-radius: 12px; }
-.p2-input { width: 100%; padding: 0.75rem; border: 2px solid #cbd5e1; border-radius: 6px; transition: border 0.3s; }
-.p2-input:focus { border-color: #06b6d4; } /* Cambio de color animado */
-.p2-btn { width: 100%; background: #06b6d4; color: white; padding: 0.8rem; border-radius: 6px; font-weight: bold; }
-</code>
-</pre>
+                        <div class="panel-codigo" id="p-code-b2">
+                            <pre><code>&lt;div style="display: flex; justify-content: space-between; background: #e2e8f0; padding: 10px;"&gt;\n    &lt;span style="background: blue; color: white; padding: 5px;"&gt;A&lt;/span&gt;\n    &lt;span style="background: red; color: white; padding: 5px;"&gt;B&lt;/span&gt;\n&lt;/div&gt;</code></pre>
                         </div>
-                        <div class="tab-contenido" id="panel-preview-2">
-                            <div class="preview-box">
-                                <div class="p2-form-container">
-                                    <div class="p2-group">
-                                        <label class="p2-label">Correo Electrónico</label>
-                                        <input type="email" class="p2-input" placeholder="tu@email.com">
-                                    </div>
-                                    <button class="p2-btn">Crear Cuenta</button>
+                        <div class="panel-ejecucion" id="p-preview-b2">
+                            <div class="live-demo-box">
+                                <div style="display: flex; justify-content: space-between; background: #e2e8f0; padding: 10px; width: 100%;">
+                                    <span style="background: blue; color: white; padding: 5px 15px; border-radius: 4px;">A</span>
+                                    <span style="background: red; color: white; padding: 5px 15px; border-radius: 4px;">B</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="proy-1">
+            <h2>Laboratorio de Mini Proyectos Prácticos</h2>
+            <div class="workspace-card">
+                <div class="card-header">
+                    <h3>Mini Proyecto 1: Tarjeta de Componente Neón</h3>
+                    <p>Combinación de bordes coloreados interactivos, sombras paralelas complejas (`box-shadow`) y contrastes oscuros.</p>
+                </div>
+                
+                <div class="tab-container">
+                    <input type="radio" name="b3-tabs" id="code-b3" class="tab-input" checked>
+                    <input type="radio" name="b3-tabs" id="preview-b3" class="tab-input">
+                    
+                    <div class="tab-nav">
+                        <label for="code-b3">Código Sin Ejecutar (Texto)</label>
+                        <label for="preview-b3">Código Ejecutado (En Vivo)</label>
+                    </div>
+
+                    <div class="tab-paneles">
+                        <div class="panel-codigo" id="p-code-b3">
+                            <pre><code>&lt;!-- HTML --&gt;\n&lt;div class="neon-card"&gt;\n    &lt;h4&gt;Cyber Station&lt;/h4&gt;\n    &lt;p&gt;Sistema de componentes estáticos activos.&lt;/p&gt;\n    &lt;button class="neon-btn"&gt;Conectar&lt;/button&gt;\n&lt;/div&gt;\n\n/* CSS */\n.neon-card { background: #111827; border: 1px solid #38bdf8; box-shadow: 0 0 15px rgba(56, 189, 248, 0.5); }</code></pre>
+                        </div>
+                        <div class="panel-ejecucion" id="p-preview-b3">
+                            <div class="live-demo-box" style="background: #020617;">
+                                <div class="neon-card">
+                                    <h4>Cyber Station</h4>
+                                    <p style="font-size: 0.85rem; margin-top: 0.5rem;">Sistema de componentes estáticos activos.</p>
+                                    <button class="neon-btn">Conectar</button>
                                 </div>
                             </div>
                         </div>
